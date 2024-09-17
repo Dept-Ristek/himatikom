@@ -1,4 +1,4 @@
-<footer class="footer mt-5">
+<footer class="footer mt-5" style="background-image: url('{{ asset('icon/Footer_N.jpg') }}'); background-size: cover; background-position: center;">
     <div class="container">
         <div class="row">
             <div class="col-md-12 mb-4">
@@ -13,8 +13,6 @@
                                 style="height: 40px; width: auto;"
                             >
                         </a>
-                            
-                        
                     </div>
 
                     <!-- Teks di tengah -->

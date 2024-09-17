@@ -4,7 +4,7 @@
 <header>
     <div
         class="page-header min-height-400"
-        style="background-image: url('{{ asset('icon/landing.jpg') }}');"
+        style="background-image: url('{{ asset('icon/Dashboard.jpg') }}');"
         loading="lazy"
     >
         <span class="mask bg-gradient-dark opacity-8"></span>
