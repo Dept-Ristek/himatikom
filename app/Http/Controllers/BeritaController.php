@@ -97,9 +97,9 @@ public function update(Request $request, $id)
 {
     $berita = Berita::find($id);
 
-    # Jika ada image baru
+    # Jika ada gambar baru
     if ($request->hasFile('foto')) {
-        $fileCheck = 'required|max:1000|mimes:jpg,jpeg,png';
+        $fileCheck = 'required|max:1000|mimes:jpg,jpeg,png,webp';
     } else {
         $fileCheck = '';
     }
@@ -118,22 +118,24 @@ public function update(Request $request, $id)
 
     $this->validate($request, $rules, $messages);
 
-    // Cek jika ada image baru
+    # Cek jika ada image baru
     if ($request->hasFile('foto')) {
-        if (\File::exists('storage/artikel/' . $berita->image)) {
-            \File::delete('storage/artikel/' . $request->old_foto);
+        # Hapus foto lama
+        if (\File::exists('public/uploads/berita/' . $berita->foto)) {
+            \File::delete('public/uploads/berita/' . $berita->foto);
         }
-        $fileName = time() . '.' . $request->foto->extension();
-        $request->file('foto')->storeAs('public/artikel', $fileName);
-    }
 
-    if ($request->hasFile('foto')) {
-        $checkFileName = $fileName;
+        # Simpan gambar baru
+        $extension = $request->file('foto')->getClientOriginalExtension();
+        $newName = Str::slug($request->judul, '-') . '-' . time() . '.' . $extension;
+        $path = $request->file('foto')->storeAs('public/uploads/berita', $newName);
+        $save_url = 'uploads/berita/' . $newName;
     } else {
-        $checkFileName = $request->old_foto;
+        # Jika tidak ada gambar baru, tetap gunakan gambar lama
+        $save_url = $berita->foto;
     }
 
-    // Artikel
+    # Proses isi artikel
     $storage = "storage/content-artikel";
     $dom = new \DOMDocument();
     libxml_use_internal_errors(true);
@@ -144,12 +146,12 @@ public function update(Request $request, $id)
 
     foreach ($images as $img) {
         $src = $img->getAttribute('src');
-        if (preg_match('/data:foto/', $src)) {
-            preg_match('/data:foto\/(?<mime>.*?)\;/', $src, $groups);
+        if (preg_match('/data:image/', $src)) {
+            preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
             $mimetype = $groups['mime'];
             $fileNameContent = uniqid();
             $fileNameContentRand = substr(md5($fileNameContent), 6, 6) . '_' . time();
-            $filePath = ("$storage/$fileNameContentRand.$mimetype");
+            $filePath = "$storage/$fileNameContentRand.$mimetype";
             $image = Image::make($src)->resize(1200, 1200)->encode($mimetype, 100)->save(public_path($filePath));
             $new_src = asset($filePath);
             $img->removeAttribute('src');
@@ -158,14 +160,16 @@ public function update(Request $request, $id)
         }
     }
 
+    # Update data berita
     $berita->update([
         'judul' => $request->judul,
-        'foto' => $checkFileName,
+        'foto' => $save_url,
         'isi' => $dom->saveHTML(),
     ]);
 
     return redirect(route('halaman-artikel'))->with('success', 'data berhasil di update');
 }
+
 
     public function destroy($id) 
     {
@@ -178,4 +182,23 @@ public function update(Request $request, $id)
 
         return redirect(route('halaman-artikel'))->with('success', 'data berhasil di hapus');
     }
+
+    // app/Http/Controllers/BeritaController.php
+
+public function filter(Request $request)
+{
+    $date = $request->date; // Format: YYYY-MM
+    $year = substr($date, 0, 4);
+    $month = substr($date, 5, 2);
+
+    // Filter berita berdasarkan bulan dan tahun
+    $beritas = Berita::whereYear('created_at', $year)
+                     ->whereMonth('created_at', $month)
+                     ->get();
+
+    // Render ulang berita dalam HTML untuk dikembalikan via AJAX
+    $view = view('partials.berita-list', compact('beritas'))->render();
+    return response()->json($view);
+}
+
 }

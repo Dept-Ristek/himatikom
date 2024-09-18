@@ -19,13 +19,30 @@ class LandingController extends Controller
         ]);
     }
 
-    public function berita(): View
-    {
-        return view('landing.berita.berita', [
-            'title' => 'JTIK POLSUB',
-            'beritas' => Berita::orderBy('id', 'desc')->get()
-        ]);
+    public function berita(Request $request)
+{
+    $date = $request->input('date');
+    $query = Berita::query();
+
+    if ($date) {
+        $query->whereYear('created_at', date('Y', strtotime($date)))
+              ->whereMonth('created_at', date('m', strtotime($date)));
     }
+
+    // Urutkan berita dari yang terbaru
+    $query->orderBy('created_at', 'desc');
+
+    // Gunakan paginate() untuk mendapatkan objek paginator
+    $beritas = $query->paginate(6);
+
+    return view('landing.berita.berita', [
+        'title' => 'JTIK POLSUB',
+        'beritas' => $beritas // Pastikan ini adalah objek paginator
+    ]);
+}
+
+
+
 
     public function detail($slug): View
 {

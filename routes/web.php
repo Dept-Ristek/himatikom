@@ -73,6 +73,7 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::controller(BeritaController::class)->middleware('auth')->middleware('check-status:pengurus,admin')->group(function () {
+    // routes/web.php
     Route::get('/halaman-artikel', 'index')->name('halaman-artikel');
     Route::get('/halaman-artikel/create', 'create')->name('halaman-artikel.create');
     Route::post('/halaman-artikel/store', 'store')->name('halaman-artikel.store');
@@ -80,6 +81,8 @@ Route::controller(BeritaController::class)->middleware('auth')->middleware('chec
     Route::post('/halaman-artikel/update/{id}', 'update')->name('halaman-artikel.update');
     Route::delete('/halaman-artikel/destroy/{id}', 'destroy')->name('halaman-artikel.destroy');
 });
+
+Route::get('/filter-berita', [BeritaController::class,'filter'])->name('filter.berita');
 
 // Route::get('/proker-agenda/program-kerja/tambah', 'tambah_proker')->name('proker-agenda.proker.tambah');
     // Route::get('/proker-agenda/program-kerja/detail/{uuid}', 'detail')->name('proker-agenda.proker.detail');
