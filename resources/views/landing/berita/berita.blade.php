@@ -19,13 +19,13 @@
     
     <div class="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
         <!-- Section with news articles -->
-        <section class="py-7" id="octagram">
+        <section class="" id="octagram">
             <div class="row py-5" data-aos="flip-up">
                 @foreach($beritas as $berita)
                 <div class="col-lg-4 mb-4">
                     <div class="card border-0 shadow-sm h-100 hovered-effect">
                         <div class="position-relative overflow-hidden">
-                            <img src="{{ asset('storage/artikel/' . $berita->foto) }}" 
+                            <img src="{{ asset($berita->foto) }}"
                                  class="img-fluid rounded-3 w-100 h-100 zoom-effect" 
                                  alt="{{ $berita->judul }}" 
                                  style="object-fit: cover; max-height: 250px;">

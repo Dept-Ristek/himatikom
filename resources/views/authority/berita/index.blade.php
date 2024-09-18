@@ -40,7 +40,7 @@
                                 <tr>
                                     <td style="text-align: center; vertical-align: middle;">{{ $no++ }}</td>
                                     <td style="text-align: center; vertical-align: middle;">
-                                        <img src="{{ Storage::url('artikel/' . $berita->foto) }}" alt="Foto" style="width: 132px; height: 132px;">
+                                        <img src="{{ asset($berita->foto) }}" alt="Foto" style="width: 132px; height: 132px;">
                                     </td>
                                     <td style="text-align: center; vertical-align: middle;">{{ $berita->judul}}</td>
                                     <td style="text-align: center; vertical-align: middle;">{{ $berita->created_at}}</td>

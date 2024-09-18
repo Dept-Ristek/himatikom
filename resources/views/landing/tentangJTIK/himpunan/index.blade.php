@@ -108,10 +108,7 @@
     </section>
     <!-- END Section with four info areas left & one card right with image and waves -->
     <!-- -------- START Features w/ pattern background & stats & rocket -------- -->
-    <section
-        class="pb-5 position-relative bg-gradient-dark mx-n3"
-        id="our_team"
-    >
+    <section class="pb-5 position-relative bg-gradient-dark mx-n3" id="our_team">
         <div class="container">
             <div class="row">
                 <div class="col-md-8 text-start mb-5 mt-5">
@@ -138,7 +135,6 @@
                             <div class="col-lg-8 col-md-6 col-12 my-auto">
                                 <div class="card-body ps-lg-0">
                                     <h5 class="mb-0">{{ $pengurus_harian->name }}</h5>
-                                    <p class="mb-0">{{ $pengurus_harian->description }}</p>
                                 </div>
                             </div>
                         </div>
@@ -146,6 +142,9 @@
                 </div>
                 @endforeach
             </div>
+
+
+
             <div class="row">
                 <div class="col-md-8 text-start mb-5 mt-5">
                     <span class="text-secondary">Biro dan Departemen</span>
@@ -170,7 +169,6 @@
                             <div class="col-lg-8 col-md-6 col-12 my-auto">
                                 <div class="card-body ps-lg-0">
                                     <h5 class="mb-0">{{ $biro_departmen->name }}</h5>
-                                    <p class="mb-0">{{ $biro_departmen->description }}</p>
                                 </div>
                             </div>
                         </div>

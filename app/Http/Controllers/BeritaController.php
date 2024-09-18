@@ -7,6 +7,8 @@ use Illuminate\View\View;
 use App\Models\Berita;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Str;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class BeritaController extends Controller
 {
@@ -58,26 +60,23 @@ class BeritaController extends Controller
         # Baca di https://dosenit.com/php/fungsi-libxml-php
         $images = $dom->getElementsByTagName('img');
 
-        foreach ($images as $img) {
-            $src = $img->getAttribute('src');
-            if (preg_match('/data:image/', $src)) {
-                preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
-                $mimetype = $groups['mime'];
-                $fileNameContent = uniqid();
-                $fileNameContentRand = substr(md5($fileNameContent), 6, 6) . '_' . time();
-                $filePath = ("$storage/$fileNameContentRand.$mimetype");
-                $image = Image::make($src)->resize(1440, 720)->encode($mimetype, 100)->save(public_path($filePath));
-                $new_src = asset($filePath);
-                $img->removeAttribute('src');
-                $img->setAttribute('src', $new_src);
-                $img->setAttribute('class', 'img-responsive');
-            }
+        
+        $save_url = '';
+        if ($request->file('foto')) {
+            $manager = new ImageManager(new Driver());
+            $extension = $request->file('foto')->getClientOriginalExtension();
+            $newName = $request->name . '-' . now()->timestamp . '.' . $extension;
+            $img = $manager->read($request->file('foto'));
+            $img = $img->resize(1920, 1080);
+
+            $img->toJpeg(80)->save(base_path('public/uploads/berita' . $newName));
+            $save_url = 'uploads/berita' . $newName;
         }
 
         Berita::create([
             'judul' => $request->judul,
             'slug' => Str::slug($request->judul, '-'),
-            'foto' => $fileName,
+            'foto' => $save_url,
             'isi' => $dom->saveHTML(),
         ]);
 

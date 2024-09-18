@@ -24,7 +24,7 @@
 
         <!-- Berita Image -->
         <div class="text-center mb-4">
-            <img src="{{ asset('storage/artikel/' . $berita->foto) }}" class="img-fluid rounded shadow" alt="{{ $berita->judul }}" style="max-height: 400px; object-fit: cover;">
+            <img src="{{ asset($berita->foto) }}" class="img-fluid rounded shadow" alt="{{ $berita->judul }}" style="max-height: 100000000px; object-fit: cover;">
         </div>
 
         <!-- Berita Content -->
