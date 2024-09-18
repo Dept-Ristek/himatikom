@@ -20,36 +20,33 @@
         <div class="sidebarMenuScroll">
             <ul>
                 @foreach ($sidebar_menus as $sidebar_menu)
-                @if($sidebar_menu['children'])
-                <li
-                    class="sidebar-dropdown {{ in_array($sidebar_menu['slug_name'], array_slice(explode('/', request()->url()), 3)) ? 'active' : '' }}">
+                @if(isset($sidebar_menu['children']) && $sidebar_menu['children'])
+                <li class="sidebar-dropdown {{ in_array($sidebar_menu['slug_name'], array_slice(explode('/', request()->url()), 3)) ? 'active' : '' }}">
                     <a href="#">
                         {!! $sidebar_menu['icon'] !!}
-                        <span
-                            class="menu-text {{ in_array($sidebar_menu['slug_name'], array_slice(explode('/', request()->url()), 3)) ? 'text-primary' : '' }}"
-                        >{{ $sidebar_menu['name'] }}</span>
+                        <span class="menu-text {{ in_array($sidebar_menu['slug_name'], array_slice(explode('/', request()->url()), 3)) ? 'text-primary' : '' }}">
+                            {{ $sidebar_menu['name'] }}
+                        </span>
                     </a>
                     <div class="sidebar-submenu">
                         <ul>
                             @foreach ($sidebar_menu['children'] as $sidebar_children)
                             <li>
-                                <a
-                                    class="{{ in_array($sidebar_children['slug_name'], array_slice(explode('/', request()->url()), 3)) ? 'text-primary' : '' }}"
-                                    href="{{ route($sidebar_children['url']) }}"
-                                >{{ $sidebar_children['name'] }}</a>
+                                <a class="{{ in_array($sidebar_children['slug_name'], array_slice(explode('/', request()->url()), 3)) ? 'text-primary' : '' }}" href="{{ route($sidebar_children['url']) }}">
+                                    {{ $sidebar_children['name'] }}
+                                </a>
                             </li>
                             @endforeach
                         </ul>
                     </div>
                 </li>
                 @else
-                <li
-                    class="{{ in_array($sidebar_menu['slug_name'], array_slice(explode('/', request()->url()), 3)) ? 'active' : '' }}">
+                <li class="{{ in_array($sidebar_menu['slug_name'], array_slice(explode('/', request()->url()), 3)) ? 'active' : '' }}">
                     <a href="{{ route($sidebar_menu['url']) }}">
                         {!! $sidebar_menu['icon'] !!}
-                        <span
-                            class="menu-text {{ in_array($sidebar_menu['slug_name'], array_slice(explode('/', request()->url()), 3)) ? 'text-primary' : '' }}"
-                        >{{ $sidebar_menu['name'] }}</span>
+                        <span class="menu-text {{ in_array($sidebar_menu['slug_name'], array_slice(explode('/', request()->url()), 3)) ? 'text-primary' : '' }}">
+                            {{ $sidebar_menu['name'] }}
+                        </span>
                     </a>
                 </li>
                 @endif
@@ -61,6 +58,7 @@
                     </a>
                 </li>
             </ul>
+            
         </div>
     </div>
     <!-- Sidebar menu ends -->

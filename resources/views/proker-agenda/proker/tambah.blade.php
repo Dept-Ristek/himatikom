@@ -58,7 +58,7 @@
                                 </div>
                                 <div class="col-xl-6 col-sm-12 col-12">
                                     <div class="form-actions-footer">
-                                        <a href="{{ route('user.user-anggota') }}" class="btn btn-light">Batankan</a>
+                                        <a href="{{ route('user.user-anggota') }}" class="btn btn-light">Batalkan</a>
                                         <button class="btn btn-success">Submit</button>
                                     </div>
                                 </div>

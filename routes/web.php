@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BeritaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
@@ -21,10 +22,23 @@ use App\Http\Controllers\EventAbsenceController;
 |
 */
 
+
 Route::controller(LandingController::class)->group(function () {
     Route::get('/', 'index')->name('landing');
+    Route::get('/berita', 'berita')->name('berita');
+    Route::get('/detail/{slug}', 'detail')->name('detail');
     Route::get('/my-profile', 'profile')->name('my-profile')->middleware('auth');
+    Route::get('/visi-misi', 'visi_misi')->name('visi-misi');
+    Route::get('/tujuan', 'tujuan')->name('tujuan');
+    Route::get('/riwayat-singkat', 'riwayatSingkat')->name('riwayat-singkat');
+    Route::get('/struktur-organisasi', 'strukturOrganisasi')->name('struktur-organisasi');
+    Route::get('/fasilitas-2024', 'fasilitas')->name('fasilitas');
+    Route::get('/kompetensi-lulusan', 'kompetensiLulusan')->name('kompetensi-lulusan');
+    Route::get('/himpunan', 'himpunan')->name('himpunan');
+    Route::get('/kontak', 'kontak')->name('kontak');
     Route::get('/absensi', 'absensi')->name('absensi-online');
+    Route::get('/sistem-informasi', 'sistemInformasi')->name('sistem-informasi');
+    Route::get('/teknik-rpl', 'teknikRPL')->name('teknik-rpl');
 });
 
 Route::controller(DashboardController::class)->middleware('auth')->middleware('check-status:pengurus,admin')->group(function () {
@@ -58,6 +72,30 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/login/credentials', 'credentials')->name('credentials');
 });
 
+Route::controller(BeritaController::class)->middleware('auth')->middleware('check-status:pengurus,admin')->group(function () {
+    // routes/web.php
+    Route::get('/halaman-artikel', 'index')->name('halaman-artikel');
+    Route::get('/halaman-artikel/create', 'create')->name('halaman-artikel.create');
+    Route::post('/halaman-artikel/store', 'store')->name('halaman-artikel.store');
+    Route::get('/halaman-artikel/edit/{id}', 'edit')->name('halaman-artikel.edit');
+    Route::post('/halaman-artikel/update/{id}', 'update')->name('halaman-artikel.update');
+    Route::delete('/halaman-artikel/destroy/{id}', 'destroy')->name('halaman-artikel.destroy');
+});
+
+Route::get('/filter-berita', [BeritaController::class,'filter'])->name('filter.berita');
+
+// Route::get('/proker-agenda/program-kerja/tambah', 'tambah_proker')->name('proker-agenda.proker.tambah');
+    // Route::get('/proker-agenda/program-kerja/detail/{uuid}', 'detail')->name('proker-agenda.proker.detail');
+
+    // Route::get('/proker-agenda/agenda', 'agenda')->name('proker-agenda.agenda');
+
+    // Route::post('/proker-agenda/program-kerja/store', 'store_proker')->name('proker-agenda.proker.store');
+    // Route::get('/proker-agenda/berita', 'berita_proker')->name('proker-agenda.berita');
+
+Route::controller(EventAbsenceController::class)->group(function () {
+    Route::post('/proker-agenda/absensi/store/{uuid}', 'store_absensi')->name('proker-agenda.absensi.store');
+});
+
 Route::controller(EventController::class)->middleware('auth')->middleware('check-status:pengurus,admin')->group(function () {
     Route::get('/proker-agenda/program-kerja', 'proker')->name('proker-agenda.proker');
     Route::get('/proker-agenda/program-kerja/tambah', 'tambah_proker')->name('proker-agenda.proker.tambah');
@@ -66,6 +104,7 @@ Route::controller(EventController::class)->middleware('auth')->middleware('check
     Route::get('/proker-agenda/agenda', 'agenda')->name('proker-agenda.agenda');
 
     Route::post('/proker-agenda/program-kerja/store', 'store_proker')->name('proker-agenda.proker.store');
+    // Route::get('/proker-agenda/berita', 'berita_proker')->name('proker-agenda.berita');
 });
 
 Route::controller(EventAbsenceController::class)->group(function () {

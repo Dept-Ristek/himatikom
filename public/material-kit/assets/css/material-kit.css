@@ -117,6 +117,13 @@ body {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+.hovered-effect{
+  transition: .3s;
+}
+
+.hovered-effect:hover{
+  transform: scale(1.1);
+}
 
 hr {
   margin: 1rem 0;

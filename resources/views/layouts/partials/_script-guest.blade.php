@@ -126,7 +126,7 @@
         confirmButtonText: "Logout!"
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = `{{ config('app.url') }}/logout`
+                window.location.href = `{{ route('logout') }}`
             }
         });
     }

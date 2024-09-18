@@ -30,10 +30,8 @@
                         <span class="status online"></span>
                     </span>
                 </a>
-                <div
-                    class="dropdown-menu dropdown-menu-end"
-                    aria-labelledby="userSettings"
-                >
+                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userSettings">
+
                     <div class="header-profile-actions">
                         <a href="{{ route('profile') }}">Profile</a>
                         <a onclick="handleLogout()">Logout</a>

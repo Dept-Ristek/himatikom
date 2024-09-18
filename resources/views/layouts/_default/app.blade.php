@@ -41,6 +41,6 @@
 
     @include('layouts.partials._script-app')
 
+    @yield('script')
 </body>
-
 </html>

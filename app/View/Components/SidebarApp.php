@@ -50,6 +50,13 @@ class SidebarApp extends Component
                 ]
             ],
             [
+                'name' => 'Halaman Artikel',
+                'icon' => '<i class="bi bi-newspaper"></i>',
+                'url' => 'halaman-artikel',
+                'slug_name' => 'halaman-artikel',
+                'access' => ['admin', 'pengurus'],
+            ],            
+            [
                 'name' => 'Proker Agenda',
                 'icon' => '<i class="bi bi-journal-bookmark-fill"></i>',
                 'url' => 'proker-agenda.proker',
@@ -66,6 +73,11 @@ class SidebarApp extends Component
                         'url' => 'proker-agenda.agenda',
                         'slug_name' => 'agenda',
                     ],
+                    // [
+                    //     'name' => 'Penulisan Berita',
+                    //     'url' => 'proker-agenda.berita',
+                    //     'slug_name' => 'berita',
+                    // ],
                 ]
             ],
             [

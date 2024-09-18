@@ -49,13 +49,47 @@
                 <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>
-            <div class="login-form-actions">
-                <button
-                    type="submit"
-                    class="btn"
-                > <span class="icon"> <i class="bi bi-arrow-right-circle"></i> </span>
-                    Login</button>
+            <div class="row justify-content-between mt-3">
+                <!-- Tombol Kembali -->
+                <div class="col-lg-6">
+                    <div>
+                        <button
+                            type="button"
+                            class="btn"
+                            onclick="kembaliHome()"
+                        >
+                            <span class="icon"> 
+                                <i class="bi bi-arrow-left-circle"></i>
+                            </span> 
+                            Kembali
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Tombol Login -->
+                <div class="col-lg-6">
+                    <div class="login-form-actions">
+                        <button
+                            type="submit"
+                            class="btn"
+                        >
+                            <span class="icon"> 
+                                <i class="bi bi-arrow-right-circle"></i> 
+                            </span> 
+                            Login
+                        </button>
+                    </div>
+                </div>
             </div>
+            
+            <!-- Tambahkan JavaScript untuk navigasi kembali -->
+            <script>
+                function kembaliHome() {
+                    window.location.href = "{{ route('landing') }}";  // Laravel route function
+                }
+            </script>
+            
+            
         </div>
     </div>
 </form>
