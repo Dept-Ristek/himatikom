@@ -60,7 +60,7 @@ class LandingController extends Controller
     }
     public function tujuan(): View
     {
-        return view('landing.tentangJTIK.tujuan.index', [
+        return view('landing.tentangJTIK.Tujuan.index', [
             'title' => 'JTIK POLSUB | Tujuan',
             'pengurus_harians' => PengurusHarian::all(),
             'biro_departments' => BiroDepartment::all() 
@@ -86,7 +86,7 @@ class LandingController extends Controller
     public function fasilitas(): View
     {
         $fasilitas = Fasilitas::all();
-        return view('landing.tentangJTIK.fasilitas.index', [
+        return view('landing.tentangJTIK.Fasilitas.index', [
             'title' => 'JTIK POLSUB | Fasilitas Kami',
             'fasilitas' => $fasilitas
         ]);
