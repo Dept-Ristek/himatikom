@@ -351,7 +351,7 @@
                         </div>
                     </div>
                     <div class="row ">
-                        <div class="col-12 col-lg-5  ms-auto mt-lg-0 mt-4">
+                        <div class="col-12 col-lg-5  ms-auto mt-lg-0 mt-4 hovered-effect">
                             <div class="card shadow-xl h-100 px-6 py-6 outline">
                                 <div class="card-body text-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
@@ -402,15 +402,15 @@
                                         </g>
                                     </svg>
                                     <h4 class="font-weight-bold mt-3">
-                                        KELAS
+                                        KELAS TEORI
                                     </h4>
-                                    <p class="mb-0 text-center">
+                                    <p class="mb-0 text-center hidden-text">
                                         Pada Tahun 2024 Gedung JTIK, Memiliki 5 Kelas Teori
                                     </p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-5  ms-auto mt-lg-0 mt-4">
+                        <div class="col-12 col-lg-5  ms-auto mt-lg-0 mt-4 hovered-effect">
                             <div class="card shadow-xl h-100 px-6 py-6 outline">
                                 <div class="card-body text-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
@@ -469,9 +469,9 @@
                                         </g>
                                     </svg>
                                     <h4 class="font-weight-bold mt-3">
-                                        LABORATORIUM
+                                        LABORATORIUM PRAKTIKUM
                                     </h4>
-                                    <p class="mb-0 text-center">
+                                    <p class="mb-0 text-center hidden-text">
                                         Pada Tahun 2024 Gedung JTIK, Memiliki 5 Laboratorium Praktik
                                     </p>
                                 </div>
