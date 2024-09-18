@@ -33,12 +33,14 @@ class BeritaController extends Controller
             'judul' => 'required',
             'foto' => 'required|max:1000|mimes:jpg,jpeg,png,webp',
             'isi' => 'required|min:20',
+            'created' => 'required|',
         ];
 
         $messages = [
             'judul.required' => 'Judul wajib diisi!',
             'foto.required' => 'Foto wajib diisi!',
             'isi.required' => 'Isi wajib diisi!',
+            'created.required' => 'Tanggal wajib diisi!'
         ];
 
         $this->validate($request, $rules, $messages);
@@ -78,6 +80,7 @@ class BeritaController extends Controller
             'slug' => Str::slug($request->judul, '-'),
             'foto' => $save_url,
             'isi' => $dom->saveHTML(),
+            'created_at' => $request->created
         ]);
 
         return redirect(route('halaman-artikel'))->with('success', 'data berhasil di simpan');

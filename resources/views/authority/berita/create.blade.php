@@ -15,8 +15,8 @@
             <form action="{{ route('halaman-artikel.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
 
-                <div class="form-group mb-4">
-                    <label for="">Masukkan Judul</label>
+                <div class="form-group mb-4 mt-4">
+                    <label for="" class="mb-2">Masukkan Judul</label>
                     <input type="text" class="form-control @error('judul') is-invalid @enderror" 
                     name="judul" value="{{ old('judul' )}}">
 
@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="form-group mb-4">
-                    <label for="">Pilih Thumbnail</label>
+                    <label for="" class="mb-2">Pilih Thumbnail</label>
                     <input type="file" class="form-control @error('foto') is-invalid @enderror" 
                     name="foto">
 
@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="form-group mb-4">
-                    <label for="">Artikel Berita</label>
+                    <label for="" class="mb-2">Artikel Berita</label>
                     <textarea type="text" class="form-control @error('isi') is-invalid @enderror" 
                     name="isi" id="textarea">
                     {{ old('isi') }}
@@ -48,6 +48,18 @@
 
                     @error('isi')
                     <div class="text-danger">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="" class="mb-2">Tanggal Kegiatan</label>
+                    <input type="date" class="form-control @error('created') is-invalid @enderror" 
+                    name="created" value="{{ old('created' )}}">
+
+                    @error('created')
+                    <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                     @enderror
