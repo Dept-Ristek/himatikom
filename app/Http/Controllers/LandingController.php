@@ -15,7 +15,7 @@ class LandingController extends Controller
     {
         return view('landing.index', [
             'title' => 'JTIK POLSUB',
-            'beritas' => Berita::orderBy('id', 'desc')->limit(3)->get()
+            'beritas' => Berita::orderBy('id', 'desc')->limit(10)->get()
         ]);
     }
 
