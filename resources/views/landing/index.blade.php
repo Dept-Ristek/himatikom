@@ -15,8 +15,14 @@
             opacity: 1;
         }
 
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 5%;
+        }
+
+
         .carousel-control-prev-icon,
-    .carousel-control-next-icon {
+        .carousel-control-next-icon {
         background-color: black; /* Mengubah warna background panah menjadi hitam */
         background-size: 100%, 100%; /* Menyesuaikan ukuran ikon */
     }
@@ -136,7 +142,7 @@
                                         <div class="card-body">
                                             <p class="text-muted small mb-2">{{ $berita->created_at->format('d M Y') }}</p>
                                             <h5 class="fw-bold mb-3">{{ $berita->judul }}</h5>
-                                            <a href="/detail/{{ $berita->slug }}" class="text-decoration-none text-danger fw-bold">
+                                            <a href="/detail/{{ $berita->slug }}" class="text-decoration-none text-danger text-center fw-bold">
                                                 Ke Halaman >>
                                             </a>
                                         </div>
@@ -149,14 +155,15 @@
                     </div>
                 
                     <!-- Controls -->
-                    <button class="carousel-control-prev" type="button" data-bs-target="#beritaCarousel" data-bs-slide="prev">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#beritaCarousel" data-bs-slide="prev" style="padding-left: 20px;">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#beritaCarousel" data-bs-slide="next">
+                    <button class="carousel-control-next" type="button" data-bs-target="#beritaCarousel" data-bs-slide="next" style="padding-right: 20px;">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
+                    
                 </div>
                 
                 
