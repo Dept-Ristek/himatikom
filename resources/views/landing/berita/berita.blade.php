@@ -2,8 +2,17 @@
 @section('content')
     <!-- -------- START HEADER 7 w/ text and video ------- -->
     <header class="bg-gradient-dark">
-        <div class="page-header" style="height: 200px;">
+        <div class="page-header min-vh-75" style="background-image: url('{{ asset('icon/Dashboard.jpg') }}');">
             <span class="mask bg-gradient-dark opacity-6"></span>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 text-center mx-auto my-auto position-relative">
+                        <h1 class="text-white position-relative">Berita Terkini
+                            <div class="line"></div>
+                        </h1>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
     <!-- -------- END HEADER 7 w/ text and video ------- -->
