@@ -18,14 +18,18 @@
         .carousel-control-prev,
         .carousel-control-next {
             width: 5%;
+            transition: opacity 0.2s ease; /* Animasi perubahan opacity */
+            opacity: 0; /* Panah menghilang ketika tidak didekati */
         }
 
 
-        .carousel-control-prev-icon,
+        .carousel-control-prev-icon {
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="%23000" viewBox="0 0 16 16"%3E%3Cpath d="M4.646 8l4.646-4.646a.5.5 0 0 0-.708-.708L3.707 8l4.647 4.646a.5.5 0 0 0 .708-.708L4.646 8z"/%3E%3C/svg%3E');
+  }
+
         .carousel-control-next-icon {
-        background-color: black; /* Mengubah warna background panah menjadi hitam */
-        background-size: 100%, 100%; /* Menyesuaikan ukuran ikon */
-    }
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="%23000" viewBox="0 0 16 16"%3E%3Cpath d="M11.354 8l-4.646 4.646a.5.5 0 0 1-.708-.708L10.293 8 6 3.707a.5.5 0 1 1 .708-.708L11.354 8z"/%3E%3C/svg%3E');
+  }
     </style>
 
     <header class="bg-gradient-dark">
