@@ -75,12 +75,13 @@
     </style>
 
     <!-- Tampilkan navbar hanya jika halaman bukan halaman detail -->
-    @if (!Request::is('detail/*'))
-        @include('layouts.partials._navbar-guest')
-    @endif
+    {{-- @if (!Request::is('detail/*'))
+        
+    @endif --}}
 
     @yield('content')
 
+    @include('layouts.partials._navbar-guest')
     @include('layouts.partials._footer-guest')
     @include('layouts.partials._script-guest')
 </body>

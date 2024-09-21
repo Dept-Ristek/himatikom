@@ -1,14 +1,12 @@
 @extends('layouts._default.guest')
 @section('content')
 
-{{-- <header class="bg-gradient-dark">
-    <div class="page-header min-vh-75 d-flex align-items-center" style="background-image: url('{{ asset('icon/landing.jpg') }}');">
+<header class="bg-gradient-dark">
+    <div class="page-header" style="height: 100px;">
         <span class="mask bg-gradient-dark opacity-6"></span>
-        <div class="container text-center">
-            <h1 class="text-white">{{$berita->judul}}</h1>
-        </div>
     </div>
-</header> --}}
+</header>
+
 
 <section id="detail" class="py-5">
     <div class="container col-xxl-8">
