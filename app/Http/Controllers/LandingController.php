@@ -19,6 +19,7 @@ class LandingController extends Controller
         ]);
     }
 
+
     public function berita(Request $request)
 {
     // Pencarian berdasarkan judul (keyword)
@@ -61,6 +62,7 @@ class LandingController extends Controller
         $berita = Berita::where('slug', $slug)->first();
         return view('landing.berita.detail', [
             'title' => 'JTIK POLSUB',
+            'beritas' => Berita::orderBy('id', 'desc')->limit(10)->get(),
             'berita' => $berita, // Changed 'beritas' to 'berita'
         ]);
     }
