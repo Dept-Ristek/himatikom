@@ -15,7 +15,7 @@ class LandingController extends Controller
     {
         return view('landing.index', [
             'title' => 'JTIK POLSUB',
-            'beritas' => Berita::orderBy('id', 'desc')->limit(10)->get(),
+            'beritas' => Berita::orderBy('id', 'desc')->limit(9)->get(),
         ]);
     }
 
@@ -45,7 +45,7 @@ class LandingController extends Controller
     $query->orderBy('created_at', 'desc');
 
     // Paginate hasil pencarian
-    $beritas = $query->paginate(6);
+    $beritas = $query->paginate(9);
     $totalBerita = $query->count();
 
     return view('landing.berita.berita', [
@@ -62,7 +62,7 @@ class LandingController extends Controller
         $berita = Berita::where('slug', $slug)->first();
         return view('landing.berita.detail', [
             'title' => 'JTIK POLSUB',
-            'beritas' => Berita::orderBy('id', 'desc')->limit(10)->get(),
+            'beritas' => Berita::orderBy('id', 'desc')->limit(9)->get(),
             'berita' => $berita, // Changed 'beritas' to 'berita'
         ]);
     }
