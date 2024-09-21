@@ -57,15 +57,21 @@ class LandingController extends Controller
 }
 
 
-    public function detail($slug): View
-    {
-        $berita = Berita::where('slug', $slug)->first();
-        return view('landing.berita.detail', [
-            'title' => 'JTIK POLSUB',
-            'beritas' => Berita::orderBy('id', 'desc')->limit(9)->get(),
-            'berita' => $berita, // Changed 'beritas' to 'berita'
-        ]);
-    }
+public function detail($slug): View
+{
+    $berita = Berita::where('slug', $slug)->first();
+    $beritas = Berita::where('slug', '!=', $slug)
+                     ->orderBy('id', 'desc')
+                     ->limit(9)
+                     ->get();
+
+    return view('landing.berita.detail', [
+        'title' => 'JTIK POLSUB',
+        'beritas' => $beritas,
+        'berita' => $berita,
+    ]);
+}
+
 
     public function profile(): View
     {
