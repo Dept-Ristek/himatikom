@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\View\View;
 use App\Models\Berita;
-use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\View\View;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Intervention\Image\ImageManager;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class BeritaController extends Controller
 {

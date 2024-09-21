@@ -34,7 +34,7 @@
 
                     <div class="header-profile-actions">
                         <a href="{{ route('profile') }}">Profile</a>
-                        <a onclick="handleLogout()">Logout</a>
+                        <a class="element" onclick="handleLogout()">Logout</a>
                     </div>
                 </div>
             </li>

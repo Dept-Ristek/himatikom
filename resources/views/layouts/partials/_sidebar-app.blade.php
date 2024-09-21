@@ -52,7 +52,7 @@
                 @endif
                 @endforeach
                 <li>
-                    <a onclick="handleLogout()">
+                    <a class="element" onclick="handleLogout()">
                         <i class="bi bi-box-arrow-right"></i>
                         <span class="menu-text">Logout</span>
                     </a>

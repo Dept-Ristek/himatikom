@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Berita;
 use App\Models\BiroDepartment;
 use App\Models\Fasilitas;
-use App\Models\Berita;
 use App\Models\PengurusHarian;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -15,55 +15,67 @@ class LandingController extends Controller
     {
         return view('landing.index', [
             'title' => 'JTIK POLSUB',
-            'beritas' => Berita::orderBy('id', 'desc')->limit(10)->get()
+            'beritas' => Berita::orderBy('id', 'desc')->limit(10)->get(),
         ]);
     }
 
     public function berita(Request $request)
 {
-    $date = $request->input('date');
+    // Pencarian berdasarkan judul (keyword)
+    $keyword = $request->keyword;
+
     $query = Berita::query();
 
-    if ($date) {
-        $query->whereYear('created_at', date('Y', strtotime($date)))
-              ->whereMonth('created_at', date('m', strtotime($date)));
+    if ($keyword) {
+        $query->where('judul', 'LIKE', '%' . $keyword . '%');
+    }
+
+    // Pencarian berdasarkan tanggal, bulan, dan tahun
+    if ($request->filled('tanggal') || $request->filled('bulan') || $request->filled('tahun')) {
+        $query->whereYear('created_at', $request->tahun ?? date('Y')) // Default tahun ini jika tidak diisi
+              ->whereMonth('created_at', $request->bulan ?? date('m')); // Default bulan ini jika tidak diisi
+
+        if ($request->filled('tanggal')) {
+            $query->whereDay('created_at', $request->tanggal);
+        }
     }
 
     // Urutkan berita dari yang terbaru
     $query->orderBy('created_at', 'desc');
 
-    // Gunakan paginate() untuk mendapatkan objek paginator
+    // Paginate hasil pencarian
     $beritas = $query->paginate(6);
+    $totalBerita = $query->count();
 
     return view('landing.berita.berita', [
         'title' => 'JTIK POLSUB',
-        'beritas' => $beritas // Pastikan ini adalah objek paginator
+        'beritas' => $beritas, 
+        'keyword' => $keyword,
+        'totalBerita' => $totalBerita,
     ]);
 }
-
-
 
 
     public function detail($slug): View
-{
-    $berita = Berita::where('slug', $slug)->first();
-    return view('landing.berita.detail', [
-        'title' => 'JTIK POLSUB',
-        'berita' => $berita // Changed 'beritas' to 'berita'
-    ]);
-}
+    {
+        $berita = Berita::where('slug', $slug)->first();
+        return view('landing.berita.detail', [
+            'title' => 'JTIK POLSUB',
+            'berita' => $berita, // Changed 'beritas' to 'berita'
+        ]);
+    }
 
     public function profile(): View
     {
         return view('landing.profile', [
-            'title' => 'JTIK POLSUB | Profile'
+            'title' => 'JTIK POLSUB | Profile',
         ]);
     }
 
     public function absensi(): View
     {
         return view('landing.absensi', [
-            'title' => 'JTIK POLSUB | Absensi Program Kerja atau Agenda'
+            'title' => 'JTIK POLSUB | Absensi Program Kerja atau Agenda',
         ]);
     }
 
@@ -72,7 +84,7 @@ class LandingController extends Controller
         return view('landing.tentangJTIK.Visi-Misi.index', [
             'title' => 'JTIK POLSUB | Visi & Misi',
             'pengurus_harians' => PengurusHarian::all(),
-            'biro_departments' => BiroDepartment::all() 
+            'biro_departments' => BiroDepartment::all(),
         ]);
     }
     public function tujuan(): View
@@ -80,7 +92,7 @@ class LandingController extends Controller
         return view('landing.tentangJTIK.Tujuan.index', [
             'title' => 'JTIK POLSUB | Tujuan',
             'pengurus_harians' => PengurusHarian::all(),
-            'biro_departments' => BiroDepartment::all() 
+            'biro_departments' => BiroDepartment::all(),
         ]);
     }
     public function riwayatSingkat(): View
@@ -88,7 +100,7 @@ class LandingController extends Controller
         return view('landing.tentangJTIK.riwayatSingkat.index', [
             'title' => 'JTIK POLSUB | Riwayat Singkat',
             'pengurus_harians' => PengurusHarian::all(),
-            'biro_departments' => BiroDepartment::all() 
+            'biro_departments' => BiroDepartment::all(),
         ]);
     }
     public function strukturOrganisasi(): View
@@ -96,7 +108,7 @@ class LandingController extends Controller
         return view('landing.tentangJTIK.strukturOrganisasi.index', [
             'title' => 'JTIK POLSUB | Struktur Organisasi',
             'pengurus_harians' => PengurusHarian::all(),
-            'biro_departments' => BiroDepartment::all() 
+            'biro_departments' => BiroDepartment::all(),
         ]);
     }
 
@@ -105,7 +117,7 @@ class LandingController extends Controller
         $fasilitas = Fasilitas::all();
         return view('landing.tentangJTIK.Fasilitas.index', [
             'title' => 'JTIK POLSUB | Fasilitas Kami',
-            'fasilitas' => $fasilitas
+            'fasilitas' => $fasilitas,
         ]);
     }
 
@@ -114,7 +126,7 @@ class LandingController extends Controller
         return view('landing.tentangJTIK.kompetensiLulusan.index', [
             'title' => 'JTIK POLSUB | Kompetensi Lulusan',
             'pengurus_harians' => PengurusHarian::all(),
-            'biro_departments' => BiroDepartment::all() 
+            'biro_departments' => BiroDepartment::all(),
         ]);
     }
 
@@ -123,7 +135,7 @@ class LandingController extends Controller
         return view('landing.tentangJTIK.himpunan.index', [
             'title' => 'JTIK POLSUB | Himpunan',
             'pengurus_harians' => PengurusHarian::all(),
-            'biro_departments' => BiroDepartment::all() 
+            'biro_departments' => BiroDepartment::all(),
         ]);
     }
     public function kontak(): View
@@ -131,7 +143,7 @@ class LandingController extends Controller
         return view('landing.kontak.index', [
             'title' => 'JTIK POLSUB | Kontak Kami',
             'pengurus_harians' => PengurusHarian::all(),
-            'biro_departments' => BiroDepartment::all() 
+            'biro_departments' => BiroDepartment::all(),
         ]);
     }
     public function sistemInformasi(): View
@@ -139,7 +151,7 @@ class LandingController extends Controller
         return view('landing.programStudi.sistemInformasi.si_index', [
             'title' => 'JTIK POLSUB | Sistem Informasi',
             'pengurus_harians' => PengurusHarian::all(),
-            'biro_departments' => BiroDepartment::all() 
+            'biro_departments' => BiroDepartment::all(),
         ]);
     }
     public function teknikRPL(): View
@@ -147,7 +159,7 @@ class LandingController extends Controller
         return view('landing.programStudi.teknologiRekayasaPerangkatLunak.trpl_index', [
             'title' => 'JTIK POLSUB | Teknik Rekayasa Perangkat Lunak',
             'pengurus_harians' => PengurusHarian::all(),
-            'biro_departments' => BiroDepartment::all() 
+            'biro_departments' => BiroDepartment::all(),
         ]);
     }
 }

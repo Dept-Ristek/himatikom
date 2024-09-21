@@ -56,7 +56,7 @@
                 <div class="form-group mb-4">
                     <label for="" class="mb-2">Tanggal Kegiatan</label>
                     <input type="date" class="form-control @error('created') is-invalid @enderror" 
-                    name="created" value="{{ old('created' )}}">
+                    name="created" value="{{ old('created')}}">
 
                     @error('created')
                     <div class="invalid-feedback">
@@ -82,5 +82,7 @@
             selector: '#textarea',  // use # to target an ID
             height: 200,
         });
+        
     </script>
+    
 @endsection

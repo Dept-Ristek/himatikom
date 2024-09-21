@@ -6,6 +6,18 @@
 </head>
 
 <body>
+    <style>
+        .element {
+            cursor: pointer;
+            /* Mengubah cursor menjadi pointer saat mouse berada di atas elemen */
+            transition: transform 0.2s;
+            /* Efek transisi untuk animasi */
+        }
+        .element:active {
+            transform: scale(0.95);
+            /* Efek klik, mengurangi ukuran sedikit ketika elemen diklik */
+        }
+    </style>
 
     @include('layouts.partials._loader-app')
 

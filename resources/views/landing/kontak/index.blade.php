@@ -49,12 +49,12 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="subjek"   class="label-label">Subjek</label>
-                                        <input type="text" class="form-control border" id="subjek"
+                                        <input type="text" class="form-control border" id="subjek" required
                                             style="padding-left: 15px">
                                     </div>
                                     <div class="mb-3">
                                         <label for="pesan" class="form-label">Pesan</label>
-                                        <textarea class="form-control border" id="pesan" style="padding-left: 15px" rows="5"></textarea>
+                                        <textarea class="form-control border" id="pesan" style="padding-left: 15px" rows="5" required></textarea>
                                     </div>
 
                                     <button type="submit" class="btn btn-outline-info btn-info">Kirim</button>
