@@ -7,8 +7,8 @@
                     <div class="d-flex align-items-center">
                         <a href="#">
                             <img
-                                src="{{ asset('icon/logo-himpunan.png') }}"
-                                class="mb-3 footer-logo"
+                                src="{{ asset('logo/Himatikom.png') }}" alt="Logo"
+                                class="me-2"
                                 alt="second_logo"
                                 style="height: 40px; width: auto;"
                             >
