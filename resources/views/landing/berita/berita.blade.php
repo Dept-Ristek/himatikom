@@ -59,20 +59,20 @@
     <div class="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
         <!-- Filter Section -->
         <section class="mt-3">
-            <div class="row justify-content-between">
+            <div class="row justify-content-evenly">
                 <div class="col-lg-4 mx-4">
                     <!-- Form pencarian berdasarkan nama -->
                     <form action="{{ route('berita') }}" method="GET">
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" name="keyword" placeholder="Nama"
                                 value="{{ request()->keyword }}">
-                            <button type="submit" class="btn btn-warning">🔍 Cari Nama</button>
+                            <button type="submit" class="btn btn-warning">🔍</button>
                         </div>
                     </form>
                 </div>
-
+        
                 <!-- Form pencarian berdasarkan tanggal -->
-                <div class="col-lg-4">
+                <div class="col-lg-4 mx-4">
                     <form action="{{ route('berita') }}" method="GET">
                         <div class="row mb-3">
                             <div class="col">
@@ -91,14 +91,16 @@
                                     value="{{ request()->tahun }}">
                             </div>
                             <div class="col">
-                                <button type="submit" class="btn btn-warning">🗓️ Cari Tanggal</button>
+                                <button type="submit" class="btn btn-warning">🗓️</button>
                             </div>
                         </div>
                     </form>
                 </div>
+                <div class="col-lg-2">
+                    <a href="{{ route('berita') }}" class="btn btn-secondary mb-3">🔄</a>
+                </div>
             </div>
-
-            
+        
             <!-- Hasil pencarian -->
             @if (request()->has('keyword') || request()->has('tanggal') || request()->has('bulan') || request()->has('tahun'))
                 @if ($totalBerita > 0)
@@ -107,7 +109,7 @@
                     <strong class="m-4 text text-danger">Data Tidak Ada</strong>
                 @endif
             @endif
-
+        
         </section>
 
 
@@ -132,6 +134,8 @@
                     </div>
                 @endforeach
             </div>
+
+            
 
             {{-- pagination --}}
             <div class="d-flex justify-content-center mt-4">
