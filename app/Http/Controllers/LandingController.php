@@ -21,40 +21,43 @@ class LandingController extends Controller
 
 
     public function berita(Request $request)
-{
-    // Pencarian berdasarkan judul (keyword)
-    $keyword = $request->keyword;
-
-    $query = Berita::query();
-
-    if ($keyword) {
-        $query->where('judul', 'LIKE', '%' . $keyword . '%');
-    }
-
-    // Pencarian berdasarkan tanggal, bulan, dan tahun
-    if ($request->filled('tanggal') || $request->filled('bulan') || $request->filled('tahun')) {
-        $query->whereYear('created_at', $request->tahun ?? date('Y')) // Default tahun ini jika tidak diisi
-              ->whereMonth('created_at', $request->bulan ?? date('m')); // Default bulan ini jika tidak diisi
-
-        if ($request->filled('tanggal')) {
-            $query->whereDay('created_at', $request->tanggal);
+    {
+        // Pencarian berdasarkan judul (keyword)
+        $keyword = $request->keyword;
+    
+        $query = Berita::query();
+    
+        if ($keyword) {
+            $query->where('judul', 'LIKE', '%' . $keyword . '%');
         }
+    
+        // Pencarian berdasarkan tanggal, bulan, dan tahun
+        if ($request->filled('tanggal') || $request->filled('bulan') || $request->filled('tahun')) {
+            if ($request->filled('tahun')) {
+                $query->whereYear('created_at', $request->tahun);
+            }
+            if ($request->filled('bulan')) {
+                $query->whereMonth('created_at', $request->bulan);
+            }
+            if ($request->filled('tanggal')) {
+                $query->whereDay('created_at', $request->tanggal);
+            }
+        }
+    
+        // Urutkan berita dari yang terbaru
+        $query->orderBy('created_at', 'desc');
+    
+        // Paginate hasil pencarian
+        $beritas = $query->paginate(9);
+        $totalBerita = $query->count();
+    
+        return view('landing.berita.berita', [
+            'title' => 'JTIK POLSUB',
+            'beritas' => $beritas, 
+            'keyword' => $keyword,
+            'totalBerita' => $totalBerita,
+        ]);
     }
-
-    // Urutkan berita dari yang terbaru
-    $query->orderBy('created_at', 'desc');
-
-    // Paginate hasil pencarian
-    $beritas = $query->paginate(9);
-    $totalBerita = $query->count();
-
-    return view('landing.berita.berita', [
-        'title' => 'JTIK POLSUB',
-        'beritas' => $beritas, 
-        'keyword' => $keyword,
-        'totalBerita' => $totalBerita,
-    ]);
-}
 
 
 public function detail($slug): View
