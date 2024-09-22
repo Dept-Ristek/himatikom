@@ -36,6 +36,12 @@
     .arrow i {
         font-size: 1.2em; /* Ukuran ikon */
     }
+
+    .btn-refresh {
+    background-color: #28a745;
+    color: white;
+}
+
 </style>
 
 
@@ -97,8 +103,9 @@
                     </form>
                 </div>
                 <div class="col-lg-2">
-                    <a href="{{ route('berita') }}" class="btn btn-secondary mb-3"><i class="fa-solid fa-arrows-rotate"></i></a>
+                    <a href="{{ route('berita') }}" class="btn btn-refresh mb-3"><i class="fa-solid fa-arrows-rotate"></i></a>
                 </div>
+                
             </div>
         
             <!-- Hasil pencarian -->
@@ -159,6 +166,7 @@
                     <span class="disabled arrow"><i class="fas fa-chevron-right"></i></span>
                 @endif
             </div>
+            
             
         </section>
 
