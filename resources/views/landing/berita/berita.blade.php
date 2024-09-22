@@ -66,7 +66,7 @@
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" name="keyword" placeholder="Nama"
                                 value="{{ request()->keyword }}">
-                            <button type="submit" class="btn btn-warning">🔍</button>
+                            <button type="submit" class="btn btn-warning"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                     </form>
                 </div>
@@ -91,13 +91,13 @@
                                     value="{{ request()->tahun }}">
                             </div>
                             <div class="col">
-                                <button type="submit" class="btn btn-warning">🗓️</button>
+                                <button type="submit" class="btn btn-warning"><i class="fa-regular fa-calendar-days"></i></button>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="col-lg-2">
-                    <a href="{{ route('berita') }}" class="btn btn-secondary mb-3">🔄</a>
+                    <a href="{{ route('berita') }}" class="btn btn-secondary mb-3"><i class="fa-solid fa-arrows-rotate"></i></a>
                 </div>
             </div>
         
