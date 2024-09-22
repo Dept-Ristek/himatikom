@@ -1,5 +1,44 @@
 @extends('layouts._default.guest')
 @section('content')
+
+
+<style>
+    .d-flex {
+        align-items: center;
+    }
+
+    .arrow {
+        padding: 0 10px;
+        font-weight: bold;
+        text-decoration: none;
+        color: #007bff; /* Ganti dengan warna yang diinginkan */
+    }
+
+    .page-number, .current-page {
+        display: inline-block;
+        padding: 5px 10px;
+        border: 1px solid #007bff; /* Ganti dengan warna yang diinginkan */
+        border-radius: 4px;
+        margin: 0 2px;
+        text-decoration: none;
+        color: #007bff; /* Ganti dengan warna yang diinginkan */
+    }
+
+    .current-page {
+        background-color: #007bff; /* Ganti dengan warna yang diinginkan */
+        color: white;
+    }
+
+    .disabled {
+        color: #ccc;
+    }
+
+    .arrow i {
+        font-size: 1.2em; /* Ukuran ikon */
+    }
+</style>
+
+
     <!-- -------- START HEADER 7 w/ text and video ------- -->
     <header class="bg-gradient-dark">
         <div class="page-header min-vh-75" style="background-image: url('{{ asset('icon/Dashboard.jpg') }}');">
@@ -94,11 +133,28 @@
                     </div>
                 @endforeach
             </div>
-            <!-- Pagination -->
-            <div class="d-flex justify-content-center mt-4" style="text-align: center;">
-                {{ $beritas->links() }}
+            <div class="d-flex justify-content-center mt-4">
+                @if ($beritas->onFirstPage())
+                    <span class="disabled arrow"><i class="fas fa-chevron-left"></i></span>
+                @else
+                    <a href="{{ $beritas->previousPageUrl() }}" class="arrow"><i class="fas fa-chevron-left"></i></a>
+                @endif
+            
+                @foreach ($beritas->getUrlRange(1, $beritas->lastPage()) as $page => $url)
+                    @if ($page == $beritas->currentPage())
+                        <span class="current-page">{{ $page }}</span>
+                    @else
+                        <a href="{{ $url }}" class="page-number">{{ $page }}</a>
+                    @endif
+                @endforeach
+            
+                @if ($beritas->hasMorePages())
+                    <a href="{{ $beritas->nextPageUrl() }}" class="arrow"><i class="fas fa-chevron-right"></i></a>
+                @else
+                    <span class="disabled arrow"><i class="fas fa-chevron-right"></i></span>
+                @endif
             </div>
-
+            
         </section>
 
     </div>
