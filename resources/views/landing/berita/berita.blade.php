@@ -112,7 +112,6 @@
 
 
         <!-- Section with news articles -->
-        <!-- Section with news articles -->
         <section class="mx-4" id="octagram">
             <div class="row py-5" id="news-list" data-aos="flip-up">
                 @foreach ($beritas as $berita)
@@ -133,6 +132,8 @@
                     </div>
                 @endforeach
             </div>
+
+            {{-- pagination --}}
             <div class="d-flex justify-content-center mt-4">
                 @if ($beritas->onFirstPage())
                     <span class="disabled arrow"><i class="fas fa-chevron-left"></i></span>
