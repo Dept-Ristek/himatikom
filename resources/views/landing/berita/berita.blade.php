@@ -20,20 +20,20 @@
     <div class="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
         <!-- Filter Section -->
         <section class="mt-3">
-            <div class="row justify-content-between">
+            <div class="row justify-content-evenly">
                 <div class="col-lg-4 mx-4">
                     <!-- Form pencarian berdasarkan nama -->
                     <form action="{{ route('berita') }}" method="GET">
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" name="keyword" placeholder="Nama"
                                 value="{{ request()->keyword }}">
-                            <button type="submit" class="btn btn-warning">🔍 Cari Nama</button>
+                            <button type="submit" class="btn btn-warning">🔍</button>
                         </div>
                     </form>
                 </div>
-
+        
                 <!-- Form pencarian berdasarkan tanggal -->
-                <div class="col-lg-4">
+                <div class="col-lg-4 mx-4">
                     <form action="{{ route('berita') }}" method="GET">
                         <div class="row mb-3">
                             <div class="col">
@@ -52,14 +52,16 @@
                                     value="{{ request()->tahun }}">
                             </div>
                             <div class="col">
-                                <button type="submit" class="btn btn-warning">🗓️ Cari Tanggal</button>
+                                <button type="submit" class="btn btn-warning">🗓️</button>
                             </div>
                         </div>
                     </form>
                 </div>
+                <div class="col-lg-2">
+                    <a href="{{ route('berita') }}" class="btn btn-secondary mb-3">🔄</a>
+                </div>
             </div>
-
-            
+        
             <!-- Hasil pencarian -->
             @if (request()->has('keyword') || request()->has('tanggal') || request()->has('bulan') || request()->has('tahun'))
                 @if ($totalBerita > 0)
@@ -68,38 +70,41 @@
                     <strong class="m-4 text text-danger">Data Tidak Ada</strong>
                 @endif
             @endif
-
+        
         </section>
+        
 
 
-        <!-- Section with news articles -->
         <!-- Section with news articles -->
         <section class="mx-4" id="octagram">
             <div class="row py-5" id="news-list" data-aos="flip-up">
                 @foreach ($beritas as $berita)
-                    <div class="col-lg-4 mb-4">
-                        <div class="card border-0 shadow-sm h-100 hovered-effect">
-                            <div class="position-relative overflow-hidden">
-                                <img src="{{ asset($berita->foto) }}" class="img-fluid rounded-3 w-100 h-100 zoom-effect"
-                                    alt="{{ $berita->judul }}" style="object-fit: cover; max-height: 250px;">
-                            </div>
-                            <div class="card-body">
-                                <p class="text-muted small mb-2">{{ $berita->created_at->format('d M Y') }}</p>
-                                <h5 class="fw-bold mb-3">{{ $berita->judul }}</h5>
+                <div class="col-lg-4 mb-4">
+                    <div class="card border-0 shadow-sm h-100 d-flex flex-column hovered-effect">
+                        <div class="position-relative overflow-hidden">
+                            <img src="{{ asset($berita->foto) }}" class="img-fluid rounded-3 w-100 h-100 zoom-effect"
+                                alt="{{ $berita->judul }}" style="object-fit: cover; max-height: 250px;">
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <p class="text-muted small mb-2">{{ $berita->created_at->format('d M Y') }}</p>
+                            <h5 class="fw-bold mb-3">{{ $berita->judul }}</h5>
+                            <!-- Tombol Baca Selengkapnya dengan mt-auto -->
+                            <div class="mt-auto">
                                 <a href="/detail/{{ $berita->slug }}" class="text-decoration-none text-danger fw-bold">
                                     Baca Selengkapnya > >
                                 </a>
                             </div>
                         </div>
                     </div>
+                </div>
                 @endforeach
             </div>
             <!-- Pagination -->
             <div class="d-flex justify-content-center mt-4" style="text-align: center;">
                 {{ $beritas->links() }}
             </div>
-
         </section>
+        
 
     </div>
 
